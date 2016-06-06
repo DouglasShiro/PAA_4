@@ -1,0 +1,26 @@
+Versao GCC:
+	gcc (Ubuntu 5.2.1-22ubuntu2) 5.2.1 20151010
+	Copyright (C) 2015 Free Software Foundation, Inc.
+
+Sistema operacional: 
+	Ubuntu 15.10 Wily Werewolf
+
+Compilacao do programa C:
+	gcc -Wall tsort_13_0024902_Douglas.c -o tsort
+	gcc -Wall farida_13_0024902_Douglas.c -o farida
+	gcc -Wall edist_13_0024902_Douglas.c -o edist
+	gcc -Wall knapsack_13_0024902_Douglas.c -o knapsack
+
+Execucao programa executavel:
+	./tsort a b fn P C
+	
+	onde a, b e fn sao da relacao de recorrencia.
+	P e o polinomio da complexidade a ser demonstrada.
+	C e a complexidade que pode ser grandeo, grandeomega ou teta.
+
+	./farida
+
+	./edist
+
+	./knapsack
+

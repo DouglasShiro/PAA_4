@@ -7,8 +7,8 @@
 *
 *******************************************************************************
 * 	http://www.spoj.com/problems/FARIDA/
-*
 */
+
 #include <stdio.h>
 
 long long int max(long long int a, long long int b) {

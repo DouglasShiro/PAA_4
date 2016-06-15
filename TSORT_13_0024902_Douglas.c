@@ -7,8 +7,8 @@
 *
 *******************************************************************************
 * 	http://www.spoj.com/problems/TSORT/
-*
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 

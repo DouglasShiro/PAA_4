@@ -7,8 +7,8 @@
 *
 *******************************************************************************
 * 	http://www.spoj.com/problems/EDIST/
-*
 */
+
 #include<stdio.h>
 #include<string.h>
 

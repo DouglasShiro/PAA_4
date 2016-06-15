@@ -16,30 +16,35 @@ int maior(int a, int b){
     return a<b ? b:a;
 }
 
-int knapsack(int v[], size_t sizeV, int w[], int W){
-    int n = sizeV;
-    int F[W+1];
+int knapsack(int v[], int N, int t[], int S){
+    int F[S+1];
 
-    for(int i = 0; i < W+1; i++)
+    for(int i = 0; i < S+1; i++){
         F[i] = 0;
+    }
 
-    for(int i = 0; i < n; ++i)
-        for(int a = W; a >= w[i]; --a)
-            F[a] = maior(F[a], F[a - w[i]] + v[i]);
-
-    return F[W];
+    for(int i = 0; i < N; ++i){
+        for(int j = S; j >= t[i]; --j){
+            F[j] = maior(F[j], F[j - t[i]] + v[i]);
+        }
+    }
+    return F[S];
 }
 
 int main(){
-    int W, n;
-    scanf("%d %d", &W, &n);
-    int v[n];
-    int w[n];
+    int S; /* Capacidade */
+    int N; /* Quantidade itens */
 
-    for(int i = 0; i < n; i++)
-        scanf("%d %d", &w[i], &v[i]);
+    scanf("%d %d", &S, &N);
 
-    printf("%d\n", knapsack(v, sizeof v / sizeof *v, w, W));
+    int t[N]; /* tamanho */
+    int v[N]; /* valor */
+
+    for(int i = 0; i < N; i++){
+        scanf("%d %d", &t[i], &v[i]);
+    }
+
+    printf("%d\n", knapsack(v, N, t, S));
 
 return 0;
 }

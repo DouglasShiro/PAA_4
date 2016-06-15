@@ -6,7 +6,7 @@
 *                      Douglas Shiro Yokoyama 13/0024902
 *
 *******************************************************************************
-* 	http://www.spoj.com/problems/EDIST/
+* 	http://www.spoj.com/problems/Edist/
 */
 
 #include<stdio.h>
@@ -14,49 +14,52 @@
 
 int dist[2002][2002];
 
-int diff(char i , char j)
-{
-	if(i == j) return 0;
-	else return 1;
+int dif(char i , char j){
+	return (i == j) ? 0 : 1;
 }
 
-int min(int i , int j, int k)
-{
-	if(i <= j)
-	{
-		if(i <= k) return i;
-		return k;
-	}
-	else
-	{
-		if(j <= k) return j;
-		return k;
+int min(int i , int j, int k){
+	if(i <= j){
+		return (i <= k) ? i : k;
+	}else{
+		return (j <= k) ? j : k;
 	}
 }
 
-int main()
-{
-	int len1,len2,i,j,t;
-	char str1[2002];
-	char str2[2002];
-	scanf("%d",&t);
-	while(t--)
-	{
-		scanf("%s",str1);
-		scanf("%s",str2);
-		len1 = strlen(str1);
-		len2 = strlen(str2);
-		for(i = 0 ; i <= len1 ; i++)
-			for(j = 0 ; j <= len2 ; j++)
-				dist[i][j] = 0;
-		for(i = 0 ; i <= len1 ; i++)
+int main(){
+	int T;			/* Numero de testes */
+	char A[2002];	/* Numero maximo de caracteres: 2000 */
+	char B[2002];
+	int tamA,tamB;
+	int i,j,k;
+
+	scanf("%d",&T);
+
+	for (j = 0; j < T; j++) {
+		scanf("%s",A);
+		scanf("%s",B);
+		tamA = strlen(A);
+		tamB = strlen(B);
+		for(i = 0 ; i <= tamA ; i++){
+			for(k = 0 ; k <= tamB ; k++){
+				dist[i][k] = 0;
+			}
+		}
+
+		for(i = 0 ; i <= tamA ; i++){
 			dist[i][0] = i;
-		for(i = 0 ; i <= len2 ; i++)
+		}
+
+		for(i = 0 ; i <= tamB ; i++){
 			dist[0][i] = i;
-		for(i = 1 ; i <= len1 ; i++)
-			for(j = 1 ; j <= len2 ; j++)
-				dist[i][j] = min(1+dist[i-1][j],1+dist[i][j-1],diff(str1[i-1],str2[j-1])+dist[i-1][j-1]);
-		printf("%d\n",dist[len1][len2]);
+		}
+
+		for(i = 1 ; i <= tamA ; i++){
+			for(k = 1 ; k <= tamB ; k++){
+				dist[i][k] = min((1+dist[i-1][k]), (1+dist[i][k-1]), (dif(A[i-1], B[k-1]) + dist[i-1][k-1]));
+			}
+		}
+		printf("%d\n",dist[tamA][tamB]);
 	}
 	return 0;
 }

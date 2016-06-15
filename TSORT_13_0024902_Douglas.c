@@ -11,30 +11,57 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-void counting_sort(int *A, int *B, int k, int size) {
-  int *C = (int *)calloc((k + 1), sizeof(int));
-  int i, j;
-  for (i = 0; i <= k; i++)
-    C[i] = 0;
-  for (j = 1; j <= size; j++)
-    C[A[j]] = C[A[j]] + 1;
-  for (i = 1; i <= k; i++)
-    C[i] = C[i] + C[i - 1];
-  for (j = size; j >= 1; j--) {
-    B[C[A[j]]] = A[j];
-    C[A[j]] = C[A[j]] - 1;
-  }
-}
+void quick_sort(int *list, int ini, int fim);
+int particao(int *list, int ini, int fim);
+
 int main(int argc, char const *argv[]) {
-  int size, i;
-  scanf("%d", &size);
-  int *A = (int *)calloc((size + 1), sizeof(int));
-  int *B = (int *)calloc((size + 1), sizeof(int));
-  for (i = 1; i <= size; i++)
-    scanf("%d", &A[i]);
-  counting_sort(A, B, 1000000, size);
-  for (i = 1; i <= size; i++)
-    printf("%d\n", B[i]);
-  return 0;
+    int t; /* Quantidade de números a ser ordenado [t <= 10^6] */
+    int i;
+
+    srand(time(NULL));
+
+    scanf("%d", &t);
+
+    int list[t];
+
+    for (i = 0; i < t; i++){
+        scanf("%d", &list[i]);
+    }
+
+    quick_sort(list, 0, t - 1);
+
+    for (i = 0; i < t; i++){
+        printf("%d\n", list[i]);
+    }
+return 0;
+}
+
+int particao(int *list, int ini, int fim) {
+
+    int pivo = list[ini + (rand() % (fim - ini))];
+
+    while (1) {
+
+        for(;list[ini] < pivo; ini++);
+
+        for(;list[fim] > pivo; fim--);
+
+        if (ini >= fim){
+            return fim;
+        }
+
+        int aux = list[ini];
+        list[ini++] = list[fim];
+        list[fim--] = aux;
+    }
+}
+
+void quick_sort(int *list, int ini, int fim) {
+    if (ini < fim) {
+        int p = particao(list, ini, fim);
+        quick_sort(list, ini, p);
+        quick_sort(list, p + 1, fim);
+    }
 }
